@@ -1,0 +1,14 @@
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "languages": [
+    "English",
+    "Russian"
+  ],
+  "address": {
+    "street": "Main",
+    "house": 1,
+    "apt": "2A"
+  },
+  "birth_date": "1984-08-01"
+}

@@ -1,0 +1,10 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "lib:toy-json"
+
+    - path: "app/Main.hs"
+      component: "toy-json:exe:toy-json-exe"
+
+    - path: "tests"
+      component: "toy-json:test:toy-json-test"

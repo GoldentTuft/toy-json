@@ -1,0 +1,1 @@
+curl https://www.stackage.org/lts-20.6/cabal.config > cabal.project.freeze  
