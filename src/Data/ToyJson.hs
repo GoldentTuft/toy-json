@@ -4,6 +4,7 @@ module Data.ToyJson where
 
 import Control.Applicative ((<|>))
 import Data.Attoparsec.Text hiding (take)
+import Data.Functor (($>))
 import qualified Data.Text as T
 
 data TjValue
@@ -34,7 +35,12 @@ tjNull =
   TjNull <$ string "null"
 
 tjObject :: Parser TjValue
-tjObject = TjObject <$> (char '{' *> fields [] <* char '}')
+tjObject =
+  TjObject
+    <$> choice
+      [ (char '{' *> skipSpace *> char '}') $> [],
+        char '{' *> fields [] <* char '}'
+      ]
   where
     fields acc = do
       skipSpace
@@ -54,7 +60,11 @@ tjObject = TjObject <$> (char '{' *> fields [] <* char '}')
 
 tjArray :: Parser TjValue
 tjArray =
-  TjArray <$> (char '[' *> vals [] <* char ']')
+  TjArray
+    <$> choice
+      [ (char '[' *> skipSpace *> char ']') $> [],
+        char '[' *> vals [] <* char ']'
+      ]
   where
     vals acc = do
       skipSpace

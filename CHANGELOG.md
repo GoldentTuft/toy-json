@@ -1,5 +1,8 @@
-# Revision history for toy-json
+## 0.1.1 -- 2023-06-18
 
-## 0.1.0.0 -- YYYY-mm-dd
+* バグ修正:
+  - "[]"や"{}"の対応
 
-* First version. Released on an unsuspecting world.
+## 0.1.0 -- 2023-03-12
+
+* First version.

@@ -88,7 +88,12 @@ arrayTests = do
             \\t10.0,\n\
             \\t11\n\
             \]"
-            (Just $ TJ.TjArray [TJ.TjNumber 10.0, TJ.TjNumber 11.0])
+            (Just $ TJ.TjArray [TJ.TjNumber 10.0, TJ.TjNumber 11.0]),
+          Pat "[]" (Just $ TJ.TjArray []),
+          Pat "[ ]" (Just $ TJ.TjArray []),
+          Pat "[[]]" (Just $ TJ.TjArray [TJ.TjArray []]),
+          Pat "[5,[]]" (Just $ TJ.TjArray [TJ.TjNumber 5, TJ.TjArray []]),
+          Pat "[{}]" (Just $ TJ.TjArray [TJ.TjObject []])
         ]
   testGroup "Array" $ testCaseHelp TJ.tjArray <$> pats
 
@@ -107,7 +112,10 @@ objectTests = do
             "{ \"123\": 456\n\
             \, \"KEY\": {\"KEY_NEST\": \"VAL_NEST\"}\n\
             \}"
-            (Just $ TJ.TjObject [("123", TJ.TjNumber 456.0), ("KEY", TJ.TjObject [("KEY_NEST", TJ.TjString "VAL_NEST")])])
+            (Just $ TJ.TjObject [("123", TJ.TjNumber 456.0), ("KEY", TJ.TjObject [("KEY_NEST", TJ.TjString "VAL_NEST")])]),
+          Pat "{}" (Just $ TJ.TjObject []),
+          Pat "{ }" (Just $ TJ.TjObject []),
+          Pat "{\"KEY\": []}" (Just $ TJ.TjObject [("KEY", TJ.TjArray [])])
         ]
   testGroup "Object" $ testCaseHelp TJ.tjObject <$> pats
 
