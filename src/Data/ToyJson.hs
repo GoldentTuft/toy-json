@@ -5,6 +5,7 @@ module Data.ToyJson where
 import Control.Applicative ((<|>))
 import Data.Attoparsec.Text hiding (take)
 import Data.Functor (($>))
+import Data.Scientific (Scientific)
 import qualified Data.Text as T
 
 data TjValue
@@ -12,7 +13,7 @@ data TjValue
   | TjObject [(TjKey, TjValue)]
   | TjArray [TjValue]
   | TjString T.Text
-  | TjNumber Double
+  | TjNumber Scientific
   | TjBool Bool
   deriving (Eq, Show)
 
@@ -88,7 +89,7 @@ tjString =
 
 tjNumber :: Parser TjValue
 tjNumber =
-  TjNumber <$> signed double
+  TjNumber <$> scientific
 
 tjBool :: Parser TjValue
 tjBool =
